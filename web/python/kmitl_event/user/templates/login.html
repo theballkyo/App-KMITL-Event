@@ -1,0 +1,56 @@
+{% extends "global/layout.html" %}
+{% block content %}
+<style>
+body {
+    background:-webkit-linear-gradient(315deg,#55efcb 0%,#1e5799 0%,#55efcb 0%,#5bcaff 100%);background:linear-gradient(135deg,#55efcb 0%,#1e5799 0%,#55efcb 0%,#5bcaff 100%);
+}
+.login {
+  padding-top: 180px;
+}
+.row {
+  margin-bottom: 0px;
+}
+.forgot {
+  font-size: 16px;
+  color: #fff;
+}
+</style>
+<div class="row login">
+    <div class="col s12 m4 offset-m4 z-depth-4 card-panel">
+      <form class="login-form" method="POST">
+        <div class="row">
+          <div class="input-field col s12 center">
+            <p class="center login-form-text"><h2>KMITL-Event - Backend</h2></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="small material-icons prefix">perm_identity</i>
+            <input id="email" type="text">
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="small material-icons prefix">lock</i>
+            <input id="password" type="password">
+            <label for="password">Password</label>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="input-field col s12">
+            <button class="right btn waves-effect waves-light col s12">Login<i class="material-icons right">send</i></button>
+          </div>
+        </div>
+        <p></p>
+        {% csrf_token %}
+      </form>
+    </div>
+    <div class="row">          
+      <div class="col center s12 m12 l12">
+          <a class="forgot" href="/user/forgot">ลืมรหัสผ่าน</a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
