@@ -135,3 +135,5 @@ PASSWORD_HASHERS = [
 AUTHENTICATION_BACKENDS = [
     'user.auth.Auth',
 ]
+
+LOGIN_URL = '/user/login'

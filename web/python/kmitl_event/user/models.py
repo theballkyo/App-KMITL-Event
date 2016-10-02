@@ -14,6 +14,12 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
 
+    USER_ROLES = {
+        'admin': 0,
+        'manager': 1,
+        'normal': 2,
+    }
+
     def get_full_name(self):
         # The user is identified by their email address
         return self.first_name, self.last_name
@@ -35,11 +41,10 @@ class User(AbstractBaseUser):
         # Simplest possible answer: Yes, always
         return True
 
-    @property
     def is_admin(self):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
-        return self.role == 0
+        return self.role == self.USER_ROLES['admin']
 
     class Meta:
         db_table = 'users'
