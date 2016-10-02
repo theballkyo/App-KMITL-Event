@@ -137,3 +137,5 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_URL = '/user/login'
+
+AUTH_USER_MODEL = 'user.User'

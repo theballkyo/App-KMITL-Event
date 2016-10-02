@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 # Create your models here.
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     id = models.AutoField(primary_key=True)
     email = models.EmailField()
     first_name = models.CharField(max_length=64)
@@ -31,16 +31,6 @@ class User(AbstractBaseUser):
     def __str__(self):              # __unicode__ on Python 2
         return self.email
 
-    def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
-        return True
-
-    def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always
-        return True
-
     def is_admin(self):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
@@ -48,3 +38,4 @@ class User(AbstractBaseUser):
 
     class Meta:
         db_table = 'users'
+        
