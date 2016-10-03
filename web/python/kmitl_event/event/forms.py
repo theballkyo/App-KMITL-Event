@@ -10,3 +10,5 @@ class CreateEventForm(forms.Form):
     contact_phone = forms.CharField(max_length=255)
     # Default = 0 is Free event
     cost = forms.IntegerField(default=0)
+
+    tags = forms.TextField(max_length=400)
