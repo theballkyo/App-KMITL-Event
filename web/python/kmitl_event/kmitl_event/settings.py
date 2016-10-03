@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'kmitl_event.middleware.HttpPostTunnelingMiddleware',
 ]
 
 ROOT_URLCONF = 'kmitl_event.urls'
