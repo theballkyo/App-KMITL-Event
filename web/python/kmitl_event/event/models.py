@@ -20,4 +20,5 @@ class Event(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 class Image(models.Model):
+    name = models.CharField(max_length=255, default='')
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
