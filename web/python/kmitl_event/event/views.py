@@ -1,32 +1,34 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import View
 # Create your views here.
-@login_required(redirect_field_name='')
 def home(request):
     return HttpResponse("This is event/home")
 
-@login_required(redirect_field_name='')
 def create(request):
-    if request.POST:
-        # Create a event
+        if request.POST:
+            # Create a event
+            pass
+        return render(request, "event/create.html")
+
+class EventView(LoginRequiredMixin, View):
+    redirect_field_name = ''
+
+    def get(self, request, event_id):
+        return self.show_event(request, event_id)
+    
+    def post(self, request, event_id):
+        if request.PUT:
+            return self.update_event(request, event_id)
+        elif request.DELETE:
+            return self.delete_event(request, event_id)
+        
+    def show_event(self, request, event_id):
+        return HttpResponse("Event id: " + event_id)
+
+    def update_event(self, request, event_id):
         pass
-    return render(request, "event/create.html")
 
-@login_required(redirect_field_name='')
-def do_event(request, event_id):
-    if request.PUT:
-        update_event(request, event_id)
-    elif request.DELETE:
-        delete_event(request, event_id)
-    else:
-        show_event(request, event_id)
-
-def show_event(request, event_id):
-    return HttpResponse("Event id: " + event_id)
-
-def update_event(request, event_id):
-    pass
-
-def delete_event(request, event_id):
-    pass
+    def delete_event(self, request, event_id):
+        pass
