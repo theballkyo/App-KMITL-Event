@@ -1,0 +1,30 @@
+.left-nav .collapsible-body li a {
+    font-weight: 400;
+    padding: 0 37.5px 0 35px;
+    font-size: 13px;
+    line-height: 44px;
+    height: 44px;
+    display: block;
+}
+
+.left-nav li a:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.header {color: #1565c0;font-weight: 300;}
+
+nav .brand-logo {
+    margin-left: 20px;
+}
+
+.collapsible {
+    margin-top: 30px;
+}
+
+a.collapsible-header {
+    font-weight: 500;
+}
+
+a {
+    color: #000;
+}
