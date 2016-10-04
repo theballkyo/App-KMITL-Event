@@ -2,13 +2,18 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
+
+from .forms import CreateEventForm
 # Create your views here.
 def home(request):
-    return HttpResponse("This is event/home")
+    return render(request, 'event/home.html')
 
 def create(request):
         if request.POST:
             # Create a event
+            form = CreateEventForm(request)
+            if form.is_valid():
+                pass
             pass
         return render(request, "event/create.html")
 
