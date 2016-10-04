@@ -26,8 +26,7 @@ def login_user(request):
 
             if user is not None:
                 login(request, user)
-                print("Login success")
-
+                return redirect('/event')
     return render(request, 'login.html')
 
 def logout_user(request):
