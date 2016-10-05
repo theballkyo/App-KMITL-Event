@@ -14,7 +14,7 @@ def home(request):
 
 def login_user(request):
     if request.user.is_authenticated:
-        return HttpResponse("You are logged.")
+        return redirect('/event')
 
     if request.POST:
         if LoginForm(request.POST).is_valid():
@@ -35,6 +35,5 @@ def logout_user(request):
     return redirect('/user/login')
 
 @login_required(redirect_field_name='')
-@user_passes_test(check_is_admin)
 def register_user(request):
     return HttpResponse("Hello")
