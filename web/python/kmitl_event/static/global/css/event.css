@@ -8,10 +8,10 @@
 }
 
 .left-nav li a:hover {
-    background-color: rgba(0,0,0,0.05);
+    background-color: #b3e5fc;
 }
 
-.header {color: #1565c0;font-weight: 300;}
+.header {color: #539fde;font-weight: 300;}
 
 nav .brand-logo {
     margin-left: 20px;
@@ -27,4 +27,70 @@ a.collapsible-header {
 
 a {
     color: #000;
+}
+a.collapsible-header.active {
+    background-color: #b3e5fc;
+}
+
+.taggle_sizer {
+    display: none;
+}
+
+li.taggle {
+    display: inline-block;
+    float: left;
+    margin-left: 25px;
+}
+
+.taggle_text {
+    padding: 5px 10px 5px 10px;
+    background-color: #b3e5fc;
+    border: #d4d2ff;
+    border-style: solid;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+}
+
+input.taggle_input {
+    width: 120px !important;
+    margin: 0;
+    margin-left: 15px;
+    height: 2rem;
+}
+
+.tag {
+    border: #e7f4ff;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #e7f4ff;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+}
+
+.taggle_list {
+    margin-bottom: 22px;
+}
+
+.taggle_placeholder {
+    display: none;
+}
+
+button.close {
+    padding: 0px;
+    margin: 0;
+    position: initial;
+    display: inline-block;
+    background-color: #b3e5fc;
+    font-size: 1.1rem;
+    /* position: absolute; */
+    top: 0px;
+    padding-left: 2px;
+    padding-top: 3px;
+    line-height: 100%;
+    color: #ccc;
+    color: rgba(0,0,0,.2);
+    padding-bottom: 4px;
+    /* display: none; */
+    border: 0;
+    background: 0 0;
+    cursor: pointer;
+    font-size: 25px;
 }
