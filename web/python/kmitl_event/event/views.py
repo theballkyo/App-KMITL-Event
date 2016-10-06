@@ -11,11 +11,15 @@ def home(request):
 def create(request):
         if request.POST:
             # Create a event
-            form = CreateEventForm(request)
+            form = CreateEventForm(request.POST)
             if form.is_valid():
                 pass
-            pass
-        return render(request, "event/create.html")
+            else:
+                pass
+        else:
+            form = CreateEventForm()
+                
+        return render(request, "event/create.html", {'form': form})
 
 class EventView(LoginRequiredMixin, View):
     redirect_field_name = ''
