@@ -59,10 +59,10 @@ input.taggle_input {
 
 .tag {
     border: #e7f4ff;
-    border-width: 1px;
+    border-width: 2px;
     border-style: solid;
-    background-color: #e7f4ff;
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    background-color: #f7fbff;
+    /* box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15); */
 }
 
 .taggle_list {

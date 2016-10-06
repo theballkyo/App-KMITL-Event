@@ -1,7 +1,22 @@
-{% extends "global/dash_layout.html" %} {% load static %}
+{% extends "global/dash_layout.html" %} {% load get_lang %} {% load static %}
 {% block content2 %}
 <h2 class="header">สร้างกิจกรรมใหม่</h2>
 <div class="row">
+    {% if form.errors %}
+        {% for field in form %}
+            {{ field.default_error_messages }}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    {{ field.id_for_label }} - <strong>{{ error.code|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
     <form class="col s12" method="POST">
         <div class="row">
             <p class="flow-text header">ข้อมูลทั่วไป</p>
@@ -58,6 +73,7 @@
                 <i class="material-icons right">send</i>
             </button>
         </div>
+        {% csrf_token %}
     </form>
 </div>
 {% endblock %}
