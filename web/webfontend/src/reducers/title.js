@@ -1,5 +1,5 @@
 const title = (state = {}, action) => {
-  switch (state.type) {
+  switch (action.type) {
     case 'CHANGE_TITLE':
       return {
         text: action.text

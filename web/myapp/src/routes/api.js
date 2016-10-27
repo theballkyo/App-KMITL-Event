@@ -3,8 +3,8 @@ const router = express.Router()
 const v1 = express.Router()
 
 router.use('*', (req, res, next) => {
-  res.append('Access-Control-Allow-Headers', 'authorization')
-  setTimeout(() => next(), 1000)
+  res.append('Access-Control-Allow-Headers', 'authorization, cache-control')
+  setTimeout(() => next(), 1)
   
 })
 

@@ -8,10 +8,11 @@ const login = (state = {}, action) => {
             password: ''
           }
         case 'LOGIN_SUCCESS':
+          console.log(action)
           return {
-            token: action.token
+            token: action.token,
+            user: action.user
           }
-
         case 'LOGIN_FAILED':
           return {
             errors: [

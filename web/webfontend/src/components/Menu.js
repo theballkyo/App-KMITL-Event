@@ -1,8 +1,11 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router'
 
-const Menu = () => (
+const Menu = ({user}) => (
   <aside className="menu">
+    {user ? <p className="menu-label">
+      Welcome, {user.first_name} {user.last_name}
+    </p> : ''}
     <p className="menu-label">
       General
     </p>

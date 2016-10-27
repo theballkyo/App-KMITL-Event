@@ -1,17 +1,39 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { addEvent } from '../actions'
+import { addEvent, removeTag, addTag, onTagChange, setTag, setMap, clearError, clearNotify, clearTag } from '../actions'
 import FormEvent from './FormEvent'
 import LayoutDashboard from './LayoutDashboard'
+import Tag from './Tag'
+import Loading from './Loading'
+import ErrorList from './ErrorList'
+import Map from './Map'
+import Notify from './Notify'
+import flatpickr from 'flatpickr'
 
 class EventCreate extends Component {
 
   constructor(props) {
     super()
-    this.state = {name: '', cost: 0, image: '', location: '', description: '', start_date: '', end_date: '', email: '', phone: '', contact: ''}
+    this.state = { name: '', cost: 0, image: '', location: '', description: ''
+    , start_date: '', end_date: '', email: '', phone: '', contact: ''
+    ,tag:'' }
     this.handleChange = this.handleChange.bind(this)
     this.fileHandleChange = this.fileHandleChange.bind(this)
     this.addEvent = this.addEvent.bind(this)
+  }
+
+  componentDidMount() {
+    /*
+    document.getElementById("start_date").flatpickr({
+      "inline": true,
+      "enableTime": true,
+      minDate: "today",
+    });
+    document.getElementById("end_date").flatpickr({
+      "inline": true,
+      "enableTime": true,
+      minDate: "today",
+    });*/
   }
 
   handleChange(name) {
@@ -24,20 +46,12 @@ class EventCreate extends Component {
 
   fileHandleChange(e) {
     this.setState({image: e.target.files[0]})
-    /*
-    let form = new FormData()
-    form.append('image', e.target.files[0])
-    fetch('http://localhost:3001/api/v1/image/upload?token=' + this.props.token, {
-      method: 'POST',
-      body: form
-    }).then(res => {
-      return res.json()      
-    }).then(res => {
-      this.setState({image: res.fileName})
-    }).catch(e => {
+  }
 
-    })
-    */
+  componentWillUnmount() {
+    this.props.clearError()
+    this.props.clearNotify()
+    this.props.clearTag()
   }
 
   addEvent(e) {
@@ -75,11 +89,18 @@ class EventCreate extends Component {
   }
 
   render() {
+    if (this.props.isProcessing) {
+        return (
+            <Loading type="is-warning" msg={this.props.msg} />
+        )
+    }
     return (
     <div className="">
+      <Notify notify={this.props.notify} />
+      <ErrorList errors={this.props.errors}/>
       <div className="control is-horizontal">
         <div className="control-label">
-          <label className="label">Event details</label>
+          <label className="label">Event name</label>
         </div>
         <div className="control is-grouped">
           <p className="control is-expanded">
@@ -109,6 +130,19 @@ class EventCreate extends Component {
       </div>
       <div className="control is-horizontal">
         <div className="control-label">
+          <label className="label">Maps</label>
+        </div>
+        <div className="control is-grouped">
+          <p className="control is-expanded">
+            <Map
+              onClick={(e) => this.props.setMap(e.latLng.lat(), e.latLng.lng())}
+              markers={this.props.markers}
+            />  
+          </p>
+        </div>
+      </div>
+      <div className="control is-horizontal">
+        <div className="control-label">
           <label className="label">Description</label>
         </div>
         <div className="control">
@@ -121,10 +155,10 @@ class EventCreate extends Component {
         </div>
         <div className="control is-grouped">
           <p className="control is-expanded">
-            <input className="input" type="text" placeholder="startAt" onChange={this.handleChange('start_date')}/>
+            <input id='start_date' className="input" type="text" placeholder="Start at: 2016-01-01 16:50" onChange={this.handleChange('start_date')}/>
           </p>
           <p className="control is-expanded">
-            <input className="input" type="text" placeholder="endAt" onChange={this.handleChange('end_date')}/>
+            <input id='start_date' className="input" type="text" placeholder="End at: 2016-01-01 16:50" onChange={this.handleChange('end_date')}/>
           </p>
         </div>
       </div>
@@ -150,6 +184,30 @@ class EventCreate extends Component {
         </div>
       </div>
       <div className="control is-horizontal">
+        <div className="control-label">
+          <label className="label">Cost</label>
+        </div>
+        <div className="control is-grouped">
+          <p className="control is-expanded">
+            <input className="input" type="text" placeholder="Cost" onChange={this.handleChange('cost')} />
+          </p>
+        </div>
+      </div>
+      <div className="control is-horizontal">
+        <div className="control-label">
+          <label className="label">Tags</label>
+        </div>
+        <div className="control is-grouped">
+          <p className="control">
+            {this.props.tags.map(t => <Tag data={t} onRemove={() => {this.props.removeTag(t)}} />)}
+            <input className="input tag-input" value={this.props.tag} type="text" placeholder="Add tag" onChange={e => this.props.onTagChange(e.target.value)}  />
+            <button className="button is-success" onClick={e => this.props.addTag() }>
+              Add tag
+            </button>
+          </p>
+        </div>
+      </div>
+      <div className="control is-horizontal">
         <div className="control-label"><label className="label"></label></div>
         <div className="control">
           <button className="button is-success" onClick={e => this.props.addEvent(this.state)}>
@@ -168,13 +226,20 @@ EventCreate.propTypes = {
 }
 const mapStateToProps = (state, ownProps) => {
   return {
-    token: state.login.token
+    token: state.login.token,
+    isProcessing: state.events.isProcessing,
+    msg: state.events.msg,
+    errors: state.errors.errors,
+    tags: state.tag.tags,
+    tag: state.tag.tag,
+    markers: state.map.markers,
+    notify: state.notify.msg
   }
 }
 
 EventCreate = connect(
   mapStateToProps,
-  { addEvent }
+  { addEvent, addTag, removeTag, onTagChange, setTag, setMap, clearError, clearNotify, clearTag }
 )(EventCreate)
 
 export default EventCreate

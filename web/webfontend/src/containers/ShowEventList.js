@@ -1,24 +1,39 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { loginRequest, loginFailed, receiveEvents, fetchEvents, deleteEvent } from '../actions'
+import { loginRequest, loginFailed, receiveEvents, fetchEvents, deleteEventRequest, 
+    deleteEventClick, deleteEventConfirm, deleteEventCancel,
+clearError, clearNotify, clearTag } from '../actions'
 import { browserHistory } from 'react-router'
 import EventList from '../components/EventList'
 import request from 'request'
-
+import Notify from '../components/Notify'
 class ShowEventList extends Component {
   componentDidMount() {
     this.props.fetchEvents()
   }
 
+  componentWillUnmount() {
+    this.props.clearError()
+    this.props.clearNotify()
+    this.props.clearTag()
+  }
+
   render() {
-    return <EventList {...this.props} />
+    return (
+        <div>
+            <Notify notify={this.props.notify} />
+            <EventList {...this.props} />
+        </div>
+    )
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
       events: state.events.events,
-      isLoading: state.events.isLoading
+      isProcessing: state.events.isProcessing,
+      msg: state.events.msg,
+        notify: state.notify.msg
   }
 }
 
@@ -52,7 +67,8 @@ const mapDispatchToProps = (dispatch) => {
 
 ShowEventList = connect(
     mapStateToProps,
-    { fetchEvents, deleteEvent }
+    { fetchEvents, deleteEventRequest, deleteEventClick, deleteEventConfirm, deleteEventCancel,
+        clearError, clearNotify, clearTag }
 )(ShowEventList)
 
 export default ShowEventList

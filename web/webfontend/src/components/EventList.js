@@ -1,20 +1,28 @@
 import React, { PropTypes } from 'react';
 import Event from './Event'
+import Loading from './Loading'
 
-const EventList = ({events, isLoading, deleteEvent}) => {
-    if (isLoading) {
+const EventList = ({events, isProcessing, deleteEventRequest, deleteEventClick, 
+    deleteEventConfirm, deleteEventCancel, msg}) => {
+    if (isProcessing) {
         return (
-            <div className="">Loading...</div>
+            <Loading type="is-warning" msg={msg} />
         )
     }
-    
+    console.log(events)
     if (events) {
         return (
             <div className="columns is-multiline">
                 {events.map(event => {
                     return (
                         <div key={event.id} className="column is-6">
-                            <Event event={event} deleteEvent={deleteEvent} />
+                            <Event 
+                            event={event}
+                            deleteEventRequest={deleteEventRequest}
+                            deleteEventClick={deleteEventClick}
+                            deleteEventConfirm={deleteEventConfirm}
+                            deleteEventCancel={deleteEventCancel}
+                             />
                         </div>
                     )
                 })}

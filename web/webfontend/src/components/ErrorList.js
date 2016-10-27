@@ -6,7 +6,7 @@ const ErrorList = ({errors}) => {
         return (
             <div className="hero is-danger errors">
                 {errors.map(err => {
-                    return <Error key={err.msg} error={err.msg } />
+                    return <Error key={err.msg} error={err.msg || err.message} />
                 })}
             </div>
         )

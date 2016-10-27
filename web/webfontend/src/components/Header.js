@@ -17,30 +17,6 @@ const Header = ({title}) => (
     </span>
 
     <div className="nav-right nav-menu">
-      <a className="nav-item" href="#">
-        Home
-      </a>
-      <a className="nav-item" href="#">
-        Documentation
-      </a>
-      <a className="nav-item" href="#">
-        Blog
-      </a>
-
-      <span className="nav-item">
-        <a className="button" >
-          <span className="icon">
-            <i className="fa fa-twitter"></i>
-          </span>
-          <span>Tweet</span>
-        </a>
-        <a className="button is-primary" href="#">
-          <span className="icon">
-            <i className="fa fa-download"></i>
-          </span>
-          <span>Download</span>
-        </a>
-      </span>
     </div>
   </nav>
 )

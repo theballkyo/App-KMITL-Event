@@ -40,7 +40,7 @@ class Login extends React.Component {
           <div className="hero-body">
             <div className="container">
               <div className="content column is-half is-offset-one-quarter">
-                <h2>Login to system</h2>
+                <h2>KMITL Eventory</h2>
                 <ErrorList errors={this.props.errors} />
                 <p className="control has-icon">
                   <input className="input" value={this.state.email} type="email" name="email" placeholder="Email" onChange={this.emailChange} />
@@ -52,7 +52,7 @@ class Login extends React.Component {
                 </p>
                 <p className="control">
                   <button onClick={e => { 
-                      this.props.loginRequest(this.state.email, this.state.password)
+                      return this.props.loginRequest(this.state.email, this.state.password)
                     }} 
                     className="button is-success">
                       Login

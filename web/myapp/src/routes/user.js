@@ -41,9 +41,13 @@ router.post('/login', (req, res) => {
       }
 
       let token = jwt.sign(data, req.app.get('jwtKey'), {
-        expiresIn: '1h'
+        expiresIn: '6h'
       });
-      return res.json({token: token})
+      return res.json({token: token, user: {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email
+      }})
     })
   })
 

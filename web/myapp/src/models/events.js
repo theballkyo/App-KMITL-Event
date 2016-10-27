@@ -6,7 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true,
+        notEmpty: {
+          args: true,
+          msg: 'Name is not null.'
+        }
       }
     },
     description: {
@@ -17,6 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     location: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    map: {
       type: DataTypes.STRING,
       validate: {
         notEmpty: true

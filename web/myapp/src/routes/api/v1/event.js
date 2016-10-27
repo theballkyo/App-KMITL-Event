@@ -5,17 +5,19 @@ const debug = require('debug')('myapp:api:event');
 const auth = require('../../../middleware/auth')
 
 const SAFE_ATTRIBUTES = ['id', 'name', 'description', 'location','start_date'
-                         , 'end_date', 'contact', 'email', 'phone', 'cost', 'image']
+                         , 'end_date', 'contact', 'email', 'phone', 'cost', 'image', 'map']
 
 /**
  * Get all events.
  * 
  * @return json -> all events
  */
-router.get('/', async (req, res, next) => {
+router.get('/', auth.check(), async (req, res, next) => {
     try {
         const query = req.query
         let filter = {}
+
+        filter.user_id = req.user.id
 
         // Search by name
         if (query.name)  {
@@ -86,6 +88,7 @@ router.post('/', auth.check(), async (req, res, next) => {
             phone: req.body.phone,
             cost: req.body.cost,
             location: req.body.location,
+            map: req.body.map,
             user_id: req.user.id
         })
 
@@ -106,7 +109,7 @@ router.post('/', auth.check(), async (req, res, next) => {
 
         return res.json({msg: 'success'})
     } catch(e) {
-        return res.status(500).json({msg: e.errors})
+        return res.status(500).json({err: e.errors})
     }
 })
 
@@ -136,6 +139,9 @@ router.put('/:event_id', auth.check(), async (req, res, next) => {
             return res.json({status: 'error', code: 401})
         }
 
+        // Check image is newer
+        const image = req.body.image ? req.body.image : event.image
+
         event = await event.update({
             name: req.body.name,
             description: req.body.description,
@@ -145,6 +151,9 @@ router.put('/:event_id', auth.check(), async (req, res, next) => {
             contact: req.body.contact,
             email: req.body.email,
             phone: req.body.phone,
+            image,
+            map: req.body.map,
+            location: req.body.location,
             cost: req.body.cost
         })
 
@@ -157,7 +166,7 @@ router.put('/:event_id', auth.check(), async (req, res, next) => {
         }
         return res.json({msg: 'success'})
     } catch(e) {
-        return res.status(500).json({msg: `Have a problem while creating an event!!!`})
+        return res.status(500).json({err: e.errors})
     }
 })
 
