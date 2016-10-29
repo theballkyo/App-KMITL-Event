@@ -1,0 +1,8 @@
+extends ../layout/auth.pug
+block form
+	form(method='POST')
+		span.label E-mail
+		input(type="text", name="email")
+		span.label Password
+		input(type='text', name='password')
+		input(type='submit', value='login')

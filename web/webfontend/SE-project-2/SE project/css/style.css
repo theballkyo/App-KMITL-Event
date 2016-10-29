@@ -1,0 +1,30 @@
+.ui.text.container {
+    margin-top: 30vh;
+    margin-bottom: 30vh;
+}
+
+.ui.primary.button, .ui.primary.buttons .button {
+    margin-top: 5vh;
+}
+
+h1.ui.inverted.header {
+    font-family: 'Lobster', cursive;
+    font-size: 7vh;
+}
+
+.ui.inverted.vertical.masthead.center.aligned.segment {
+    background: url('../img/homebg.jpg') no-repeat;
+    background-size: 100% 100vh;
+}
+
+.ui.inverted.button {
+    padding: 3vh;
+    font-size: 2vh;
+    margin-top: 3vh;
+}
+
+.ui.large.secondary.inverted.pointing.menu {
+    /* border-color: #a9a9a9; */
+}
+
+.ui.large.secondary.inverted.pointing.menu {}
